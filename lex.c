@@ -14,6 +14,7 @@ int lex(){
     current = yytext + yyleng;
     while(1) {
         while(!(*current)) {
+            current = input_buffer;
             if(!gets(input_buffer)) {
                 *current = '\0';
                 return EOI;
@@ -55,7 +56,7 @@ int lex(){
 
 static int lookahead = -1;
 
-int match(int token){
+int match(token_type token){
     if(lookahead == -1)
         lookahead = lex();
     return lookahead == token;

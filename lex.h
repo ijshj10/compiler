@@ -6,7 +6,7 @@ extern int yyleng;
 extern int yylineno;
 
 
-enum token_type{
+typedef enum token_type{
     EOI,
     SEMI,
     PLUS,
@@ -14,7 +14,7 @@ enum token_type{
     LP,
     RP,
     NUM_OR_ID
-};
+} token_type;
 
 int match(enum token_type);
 void advance();

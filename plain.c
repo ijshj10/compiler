@@ -23,3 +23,39 @@ int expression(){
     term();
     expr_prime();
 }
+
+int expr_prime(){
+    if(match(PLUS)){
+        advance();
+        term();
+        expr_prime();
+    }
+}
+
+int term(){
+    factor();
+    term_prime();
+}
+
+int term_prime(){
+    if(match(TIMES)) {
+        advance();
+        factor();
+        term_prime();
+    }
+}
+
+int factor(){
+    if(match(NUM_OR_ID))
+        advance();
+    else if(match(LP)){
+        advance();
+        expression();
+        if(match(RP))
+            advance();
+        else
+            fprintf(stderr, "%d: Mismatched parenthsis\n,",  yylineno);
+    }
+    else
+        fprintf(stderr, "%d: Number or identifiler expected\n,",  yylineno);
+}
